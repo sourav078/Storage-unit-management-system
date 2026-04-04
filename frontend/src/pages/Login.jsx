@@ -1,48 +1,64 @@
-import { useState } from 'react';
-import { useAuth } from '../context/AuthContext';
-import { useNavigate } from 'react-router-dom';
-import axiosInstance from '../axiosConfig';
+import { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import axiosInstance from "../api/axiosConfig";
+import { useAuth } from "../context/AuthContext";
 
 const Login = () => {
-  const [formData, setFormData] = useState({ email: '', password: '' });
-  const { login } = useAuth();
+  const [formData, setFormData] = useState({ email: "", password: "" });
   const navigate = useNavigate();
+  const { login } = useAuth();
+
+  const handleChange = (e) => {
+    setFormData((prev) => ({
+      ...prev,
+      [e.target.name]: e.target.value,
+    }));
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
     try {
-      const response = await axiosInstance.post('/api/auth/login', formData);
-      login(response.data);
-      navigate('/tasks');
+      const { data } = await axiosInstance.post("/auth/login", formData);
+      login(data);
+      navigate("/dashboard");
     } catch (error) {
-      alert('Login failed. Please try again.');
+      alert(error.response?.data?.message || "Login failed");
     }
   };
 
   return (
-    <div className="max-w-md mx-auto mt-20">
-      <form onSubmit={handleSubmit} className="bg-white p-6 shadow-md rounded">
-        <h1 className="text-2xl font-bold mb-4 text-center">Login</h1>
-        <input
-          type="email"
-          placeholder="Email"
-          value={formData.email}
-          onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-          className="w-full mb-4 p-2 border rounded"
-        />
-        <input
-          type="password"
-          placeholder="Password"
-          value={formData.password}
-          onChange={(e) => setFormData({ ...formData, password: e.target.value })}
-          className="w-full mb-4 p-2 border rounded"
-        />
-        <button type="submit" className="w-full bg-blue-600 text-white p-2 rounded">
-          Login
-        </button>
+    <div style={styles.container}>
+      <h2>Login</h2>
+      <form onSubmit={handleSubmit} style={styles.form}>
+        <input name="email" placeholder="Email" onChange={handleChange} style={styles.input} />
+        <input name="password" type="password" placeholder="Password" onChange={handleChange} style={styles.input} />
+        <button type="submit" style={styles.button}>Login</button>
       </form>
+      <p>
+        No account? <Link to="/register">Register</Link>
+      </p>
     </div>
   );
+};
+
+const styles = {
+  container: {
+    maxWidth: "400px",
+    margin: "40px auto",
+  },
+  form: {
+    display: "flex",
+    flexDirection: "column",
+    gap: "12px",
+  },
+  input: {
+    padding: "10px",
+  },
+  button: {
+    padding: "10px",
+    cursor: "pointer",
+  },
 };
 
 export default Login;

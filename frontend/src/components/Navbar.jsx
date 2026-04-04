@@ -1,44 +1,61 @@
-import { Link, useNavigate } from 'react-router-dom';
-import { useAuth } from '../context/AuthContext';
+import { Link, useNavigate } from "react-router-dom";
+import { useAuth } from "../context/AuthContext";
 
 const Navbar = () => {
-  const { user, logout } = useAuth();
+  const { userInfo, logout } = useAuth();
   const navigate = useNavigate();
 
   const handleLogout = () => {
     logout();
-    navigate('/login');
+    navigate("/login");
   };
 
   return (
-    <nav className="bg-blue-600 text-white p-4 flex justify-between items-center">
-      <Link to="/" className="text-2xl font-bold">Task Manager</Link>
+    <nav style={styles.nav}>
       <div>
-        {user ? (
+        <Link to="/" style={styles.link}>Storage Unit System</Link>
+      </div>
+
+      <div style={styles.links}>
+        <Link to="/" style={styles.link}>Home</Link>
+        {userInfo && <Link to="/dashboard" style={styles.link}>Dashboard</Link>}
+
+        {!userInfo ? (
           <>
-            <Link to="/tasks" className="mr-4">Tasks</Link>
-            <Link to="/profile" className="mr-4">Profile</Link>
-            <button
-              onClick={handleLogout}
-              className="bg-red-500 px-4 py-2 rounded hover:bg-red-700"
-            >
-              Logout
-            </button>
+            <Link to="/login" style={styles.link}>Login</Link>
+            <Link to="/register" style={styles.link}>Register</Link>
           </>
         ) : (
-          <>
-            <Link to="/login" className="mr-4">Login</Link>
-            <Link
-              to="/register"
-              className="bg-green-500 px-4 py-2 rounded hover:bg-green-700"
-            >
-              Register
-            </Link>
-          </>
+          <button onClick={handleLogout} style={styles.button}>Logout</button>
         )}
       </div>
     </nav>
   );
+};
+
+const styles = {
+  nav: {
+    padding: "16px 24px",
+    display: "flex",
+    justifyContent: "space-between",
+    alignItems: "center",
+    borderBottom: "1px solid #ddd",
+    marginBottom: "20px",
+  },
+  links: {
+    display: "flex",
+    gap: "16px",
+    alignItems: "center",
+  },
+  link: {
+    textDecoration: "none",
+    color: "#222",
+    fontWeight: "500",
+  },
+  button: {
+    padding: "8px 12px",
+    cursor: "pointer",
+  },
 };
 
 export default Navbar;
