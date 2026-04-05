@@ -6,14 +6,34 @@ const {
   getStorageUnits,
   getStorageUnitById,
   searchStorageUnits,
+  updateStorageUnit,
+  deleteStorageUnit,
 } = require("../controllers/storageUnitController");
 
-const { protect } = require("../middleware/authMiddleware");
+const { protect, protectOptional } = require("../middleware/authMiddleware");
 const { adminOnly } = require("../middleware/adminMiddleware");
+const uploadStorageUnitPhotos = require("../middleware/uploadStorageUnitPhotos");
 
-router.get("/search", searchStorageUnits);
-router.get("/:id", getStorageUnitById);
-router.get("/", getStorageUnits);
-router.post("/", protect, adminOnly, createStorageUnit);
+router.get("/search", protectOptional, searchStorageUnits);
+router.get("/:id", protectOptional, getStorageUnitById);
+router.get("/", protectOptional, getStorageUnits);
+
+router.post(
+  "/",
+  protect,
+  adminOnly,
+  uploadStorageUnitPhotos.array("photos", 5),
+  createStorageUnit
+);
+
+router.put(
+  "/:id",
+  protect,
+  adminOnly,
+  uploadStorageUnitPhotos.array("photos", 5),
+  updateStorageUnit
+);
+
+router.delete("/:id", protect, adminOnly, deleteStorageUnit);
 
 module.exports = router;
