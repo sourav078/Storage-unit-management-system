@@ -3,13 +3,21 @@
 A full-stack web application to manage storage units, bookings, and admin operations.
 
 🌟 Features
+
   👤 User
+  
       Register & Login
+      
       Browse storage units
+      
       Search units by location/size
+      
       View unit details
+      
       Book available units
+      
       View personal dashboard
+      
   🛠 Admin
       Separate login (/admin/login)
       Create storage units
