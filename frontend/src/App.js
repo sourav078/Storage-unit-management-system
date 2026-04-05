@@ -2,6 +2,7 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Navbar from "./components/Navbar";
 import ProtectedRoute from "./components/ProtectedRoute";
 import AdminRoute from "./components/AdminRoute";
+
 import Home from "./pages/Home";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
@@ -14,7 +15,7 @@ import AdminDashboard from "./pages/AdminDashboard";
 function App() {
   return (
     <Router>
-      <Navbar />
+      <Navbar ></Navbar>
 
       <Routes>
         <Route path="/" element={<Home />} />

@@ -1,84 +1,68 @@
-import { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import axiosInstance from "../api/axiosConfig";
+import AuthNavbar from "../components/AuthNavbar";
+import AuthCard from "../components/AuthCard";
+import Footer from "../components/Footer";
 import { useAuth } from "../context/AuthContext";
+import "../styles/auth.css";
 
 const AdminLogin = () => {
-  const [formData, setFormData] = useState({
-    email: "",
-    password: "",
-  });
-
   const navigate = useNavigate();
-  const { login } = useAuth();
+  const { login, logout, loading, userInfo } = useAuth();
+  const [error, setError] = useState("");
 
-  const handleChange = (e) => {
-    setFormData((prev) => ({
-      ...prev,
-      [e.target.name]: e.target.value,
-    }));
-  };
+  useEffect(() => {
+    if (userInfo?.role === "admin") {
+      navigate("/admin/dashboard");
+    }
+  }, [userInfo, navigate]);
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
+  const handleAdminLogin = async (formData) => {
+    setError("");
 
     try {
-      const { data } = await axiosInstance.post("/auth/login", formData);
+      const data = await login({
+        email: formData.email,
+        password: formData.password,
+      });
 
-      if (data.role !== "admin") {
-        alert("This account is not an admin account.");
+      if (data?.role !== "admin") {
+        logout();
+        setError("Access denied. Admin credentials are required.");
         return;
       }
 
-      login(data);
       navigate("/admin/dashboard");
-    } catch (error) {
-      alert(error.response?.data?.message || "Admin login failed");
+    } catch (err) {
+      setError(
+        err?.response?.data?.message || "Admin login failed. Please try again."
+      );
     }
   };
 
   return (
-    <div style={styles.container}>
-      <h2>Admin Login</h2>
-      <form onSubmit={handleSubmit} style={styles.form}>
-        <input
-          name="email"
-          placeholder="Admin Email"
-          onChange={handleChange}
-          style={styles.input}
-        />
-        <input
-          name="password"
-          type="password"
-          placeholder="Password"
-          onChange={handleChange}
-          style={styles.input}
-        />
-        <button type="submit" style={styles.button}>
-          Login as Admin
-        </button>
-      </form>
+    <div className="auth-page auth-page--admin">
+      <AuthNavbar hideAuthLinks ctaText="Back to Home" ctaLink="/" />
+
+      <main className="auth-page__main">
+        <div className="auth-page__container">
+          <AuthCard
+            title="Admin Login"
+            subtitle="Login to manage MR. Bunker storage operations"
+            buttonText="Admin Login"
+            footerText="Need a customer account?"
+            footerLinkText="User Login"
+            footerLinkTo="/login"
+            onSubmit={handleAdminLogin}
+            loading={loading}
+            error={error}
+          />
+        </div>
+      </main>
+
+      <Footer />
     </div>
   );
-};
-
-const styles = {
-  container: {
-    maxWidth: "400px",
-    margin: "40px auto",
-  },
-  form: {
-    display: "flex",
-    flexDirection: "column",
-    gap: "12px",
-  },
-  input: {
-    padding: "10px",
-  },
-  button: {
-    padding: "10px",
-    cursor: "pointer",
-  },
 };
 
 export default AdminLogin;
