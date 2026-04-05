@@ -112,10 +112,13 @@ A full-stack web application to manage storage units, bookings, and admin operat
                                         
 ⚙️ Step 3 — Setup Backend Environment
 Create file:
-
   backend/.env
   
-and paste this inside env: Paste this:
+and paste this inside env:
+
+                        PORT=5001
+                        MONGO_URI=your_mongodb_connection_string
+                        JWT_SECRET=your_secret_key
   
   
 Example (local MongoDB):
