@@ -1,5 +1,7 @@
 import { useEffect, useState } from "react";
 import axiosInstance from "../api/axiosConfig";
+import Navbar from "../components/Navbar";
+import Footer from "../components/Footer";
 
 const Dashboard = () => {
   const [bookings, setBookings] = useState([]);
@@ -19,6 +21,7 @@ const Dashboard = () => {
 
   return (
     <div style={styles.container}>
+      <Navbar />
       <h2>Dashboard</h2>
       <p>Your bookings are shown below.</p>
 
@@ -35,6 +38,7 @@ const Dashboard = () => {
           </div>
         ))
       )}
+      <Footer />
     </div>
   );
 };

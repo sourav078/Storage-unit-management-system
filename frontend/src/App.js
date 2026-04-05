@@ -15,7 +15,7 @@ import AdminDashboard from "./pages/AdminDashboard";
 function App() {
   return (
     <Router>
-      <Navbar ></Navbar>
+      {/* <Navbar ></Navbar> */}
 
       <Routes>
         <Route path="/" element={<Home />} />

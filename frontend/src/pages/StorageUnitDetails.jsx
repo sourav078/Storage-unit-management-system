@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import axiosInstance from "../api/axiosConfig";
+import Navbar from "../components/Navbar";
+import Footer from "../components/Footer";
 
 const StorageUnitDetails = () => {
   const { id } = useParams();
@@ -61,6 +63,7 @@ const StorageUnitDetails = () => {
 
   return (
     <div style={styles.container}>
+      <Navbar />
       <h2>Storage Unit Details</h2>
 
       <div style={styles.card}>
@@ -84,6 +87,7 @@ const StorageUnitDetails = () => {
           </button>
         )}
       </div>
+      <Footer />
     </div>
   );
 };
