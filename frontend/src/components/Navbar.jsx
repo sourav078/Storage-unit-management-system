@@ -1,5 +1,6 @@
 import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
+import "../styles/navbar.css";
 
 const Navbar = () => {
   const { userInfo, logout } = useAuth();
@@ -10,77 +11,69 @@ const Navbar = () => {
     navigate("/login");
   };
 
+  const displayName = userInfo?.name || userInfo?.email || "User";
+  const displayRole = userInfo?.role || "";
+
   return (
-    <nav style={styles.nav}>
-      <div>
-        <Link to="/" style={styles.logo}>
-          Storage Unit System
+    <header className="site-navbar">
+      <div className="site-navbar__container">
+        <Link to="/" className="site-navbar__brand">
+          MR. Bunker
         </Link>
+
+        <nav className="site-navbar__links">
+          <Link to="/" className="site-navbar__link">
+            Home
+          </Link>
+          <Link to="/search" className="site-navbar__link">
+            Units
+          </Link>
+          <Link to="/" className="site-navbar__link">
+            Services
+          </Link>
+        </nav>
+
+        <div className="site-navbar__actions">
+          {!userInfo && (
+            <>
+              <Link to="/login" className="site-navbar__text-btn">
+                Login/Registration
+              </Link>
+              <Link to="/search" className="site-navbar__outline-btn">
+                Find Storage
+              </Link>
+            </>
+          )}
+
+          {userInfo && (
+            <>
+              <div className="site-navbar__user">
+                <span className="site-navbar__user-role">{displayRole}</span>
+                <span className="site-navbar__user-separator">→</span>
+                <span className="site-navbar__user-name">{displayName}</span>
+              </div>
+
+              {userInfo.role === "customer" && (
+                <Link to="/dashboard" className="site-navbar__text-btn">
+                  Dashboard
+                </Link>
+              )}
+
+              {userInfo.role === "admin" && (
+                <Link to="/admin/dashboard" className="site-navbar__text-btn">
+                  Admin Dashboard
+                </Link>
+              )}
+
+              <button onClick={handleLogout} className="site-navbar__solid-btn">
+                Logout
+              </button>
+            </>
+          )}
+        </div>
       </div>
-
-      <div style={styles.links}>
-        <Link to="/" style={styles.link}>Home</Link>
-
-        {!userInfo && (
-          <>
-            <Link to="/login" style={styles.link}>Login</Link>
-            <Link to="/register" style={styles.link}>Register</Link>
-            <Link to="/admin/login" style={styles.link}>Admin Login</Link>
-          </>
-        )}
-
-        {userInfo && userInfo.role === "customer" && (
-          <Link to="/dashboard" style={styles.link}>Dashboard</Link>
-        )}
-
-        {userInfo && userInfo.role === "admin" && (
-          <Link to="/admin/dashboard" style={styles.link}>Admin Dashboard</Link>
-        )}
-
-        {userInfo && (
-          <button onClick={handleLogout} style={styles.button}>
-            Logout
-          </button>
-        )}
-      </div>
-    </nav>
+    </header>
   );
-};
-
-const styles = {
-  nav: {
-    padding: "16px 24px",
-    display: "flex",
-    justifyContent: "space-between",
-    alignItems: "center",
-    borderBottom: "1px solid #ddd",
-    marginBottom: "20px",
-    backgroundColor: "#fff",
-  },
-  logo: {
-    textDecoration: "none",
-    color: "#222",
-    fontWeight: "700",
-    fontSize: "18px",
-  },
-  links: {
-    display: "flex",
-    gap: "16px",
-    alignItems: "center",
-  },
-  link: {
-    textDecoration: "none",
-    color: "#222",
-    fontWeight: "500",
-  },
-  button: {
-    padding: "8px 12px",
-    cursor: "pointer",
-    backgroundColor: "#222",
-    color: "#fff",
-    border: "none",
-    borderRadius: "4px",
-  },
 };
 
 export default Navbar;

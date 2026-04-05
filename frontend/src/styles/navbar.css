@@ -1,0 +1,131 @@
+.site-navbar {
+  background: #ffffff;
+  border-bottom: 1px solid #ececec;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.site-navbar__container {
+  max-width: 1200px;
+  margin: 0 auto;
+  min-height: 72px;
+  padding: 0 24px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+}
+
+.site-navbar__brand {
+  text-decoration: none;
+  color: #d61f26;
+  font-size: 1.3rem;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.site-navbar__links {
+  display: flex;
+  align-items: center;
+  gap: 28px;
+}
+
+.site-navbar__link,
+.site-navbar__text-btn {
+  text-decoration: none;
+  color: #2b2c30;
+  font-size: 0.95rem;
+  font-weight: 500;
+}
+
+.site-navbar__actions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.site-navbar__outline-btn {
+  text-decoration: none;
+  border: 1px solid #ed1c24;
+  color: #ed1c24;
+  padding: 12px 18px;
+  border-radius: 8px;
+  font-size: 0.95rem;
+}
+
+.site-navbar__solid-btn {
+  border: none;
+  background: #ed1c24;
+  color: #ffffff;
+  padding: 12px 18px;
+  border-radius: 8px;
+  font-size: 0.95rem;
+  cursor: pointer;
+}
+
+@media (max-width: 900px) {
+  .site-navbar__links {
+    display: none;
+  }
+
+  .site-navbar__container {
+    padding: 0 16px;
+  }
+}
+
+@media (max-width: 560px) {
+  .site-navbar__text-btn {
+    display: none;
+  }
+
+  .site-navbar__brand {
+    font-size: 1.05rem;
+  }
+
+  .site-navbar__outline-btn,
+  .site-navbar__solid-btn {
+    padding: 10px 12px;
+    font-size: 0.85rem;
+  }
+}
+.site-navbar__user {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 10px 12px;
+  background: #f7f7f8;
+  border: 1px solid #ececec;
+  border-radius: 8px;
+  color: #2b2c30;
+  font-size: 0.9rem;
+  white-space: nowrap;
+}
+
+.site-navbar__user-name {
+  font-weight: 600;
+}
+
+.site-navbar__user-separator {
+  color: #8b8e95;
+}
+
+.site-navbar__user-role {
+  color: #d61f26;
+  font-weight: 600;
+  text-transform: capitalize;
+}
+
+@media (max-width: 900px) {
+  .site-navbar__links {
+    display: none;
+  }
+
+  .site-navbar__container {
+    padding: 0 16px;
+  }
+
+  .site-navbar__user {
+    display: none;
+  }
+}

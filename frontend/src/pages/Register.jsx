@@ -14,7 +14,7 @@ const Register = () => {
   useEffect(() => {
     if (userInfo) {
       if (userInfo.role === "admin") {
-        navigate("/admin-dashboard");
+        navigate("/admin/dashboard");
       } else {
         navigate("/dashboard");
       }

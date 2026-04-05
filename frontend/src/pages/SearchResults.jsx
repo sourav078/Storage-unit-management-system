@@ -2,6 +2,8 @@ import { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 import axiosInstance from "../api/axiosConfig";
 import StorageUnitCard from "../components/StorageUnitCard";
+import Navbar from "../components/Navbar";
+import Footer from "../components/Footer";
 
 const SearchResults = () => {
   const location = useLocation();
@@ -34,24 +36,30 @@ const SearchResults = () => {
   };
 
   return (
-    <div style={styles.container}>
-      <h2>Search Results</h2>
-      <p>
-        Showing results for: <strong>{query}</strong>
-      </p>
+   
+        
+          <div style={styles.container}>
+             <Navbar />
+            <h2>Search Results</h2>
+            <p>
+              Showing results for: <strong>{query}</strong>
+            </p>
 
-      {loading ? (
-        <p>Searching...</p>
-      ) : error ? (
-        <p style={styles.error}>{error}</p>
-      ) : results.length === 0 ? (
-        <p>No matching storage units found.</p>
-      ) : (
-        results.map((unit) => (
-          <StorageUnitCard key={unit._id} unit={unit} />
-        ))
-      )}
-    </div>
+            {loading ? (
+              <p>Searching...</p>
+            ) : error ? (
+              <p style={styles.error}>{error}</p>
+            ) : results.length === 0 ? (
+              <p>No matching storage units found.</p>
+            ) : (
+              results.map((unit) => (
+                <StorageUnitCard key={unit._id} unit={unit} />
+              ))
+            )}
+               <Footer /> 
+          </div>
+        
+  
   );
 };
 
