@@ -49,29 +49,31 @@ A full-stack web application to manage storage units, bookings, and admin operat
       
       Styling	----------> CSS       
 
+
 📁 Project Structure
-taskmanagerv1/
-│
-├── backend/
-│   ├── config/
-│   ├── controllers/
-│   ├── middleware/
-│   ├── models/
-│   ├── routes/
-│   ├── uploads/
-│   ├── seeds/
-│   └── server.js
-│
-├── frontend/
-│   ├── public/
-│   ├── src/
-│   │   ├── api/
-│   │   ├── components/
-│   │   ├── context/
-│   │   ├── pages/
-│   │   └── App.js
-│
-└── package.json
+
+      taskmanagerv1/
+      │
+      ├── backend/
+      │   ├── config/
+      │   ├── controllers/
+      │   ├── middleware/
+      │   ├── models/
+      │   ├── routes/
+      │   ├── uploads/
+      │   ├── seeds/
+      │   └── server.js
+      │
+      ├── frontend/
+      │   ├── public/
+      │   ├── src/
+      │   │   ├── api/
+      │   │   ├── components/
+      │   │   ├── context/
+      │   │   ├── pages/
+      │   │   └── App.js
+      │
+      └── package.json
 
 
 ⚙️ Prerequisites
