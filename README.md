@@ -100,15 +100,15 @@ A full-stack web application to manage storage units, bookings, and admin operat
   📥 Step 1 — Clone the Project
    Create a folder, open the terminal at its root and paste the following code:
    
-                                                                                  git clone <your-repo-url>
-                                                                                  cd taskmanagerv1
+                            git clone <your-repo-url>
+                            cd taskmanagerv1
 
  📦 Step 2 — Install Dependencies
  nd paste the following code aswell:
  
-                                        npm install
-                                        npm install --prefix backend
-                                        npm install --prefix frontend                                                                               
+                            npm install
+                            npm install --prefix backend
+                            npm install --prefix frontend                                                                               
                                         
 ⚙️ Step 3 — Setup Backend Environment
 Create file:
