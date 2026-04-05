@@ -170,17 +170,18 @@ MONGO_URI=mongodb://127.0.0.1:27017/storage-system
 
 🚀 Future Improvements
 
-  AWS S3 for image storage
-  Booking approval system
-  Notifications for admin
-  Payment integration
-  Role-based dashboard separation    
+
+        AWS S3 for image storage
+        Booking approval system
+        Notifications for admin
+        Payment integration
+        Role-based dashboard separation    
 
 
 💡 Final Note
 
-This project demonstrates:
 
+This project demonstrates:
   Full-stack development
   Authentication & authorization
   File uploads
