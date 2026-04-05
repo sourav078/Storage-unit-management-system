@@ -127,12 +127,13 @@ MONGO_URI=mongodb://127.0.0.1:27017/storage-system
   Create:
   frontend/.env
   Paste:
+  
   REACT_APP_API_BASE_URL=http://localhost:5001/api
 
 
 🧑‍💼 Step 5 — Create Admin User (Seed)
 
-      type in terminal:
+     
       node backend/seeds/adminSeeder.js
       
   You should see:
