@@ -18,12 +18,17 @@ A full-stack web application to manage storage units, bookings, and admin operat
           
           View personal dashboard
       
-  🛠 Admin
-      Separate login (/admin/login)
-      Create storage units
-      Upload real images (max 5 per unit)
-      Update unit details & status
-      Delete units
+        🛠 Admin
+        
+            Separate login (/admin/login)
+            
+            Create storage units
+            
+            Upload real images (max 5 per unit)
+            
+            Update unit details & status
+            
+            Delete units
 
 🧱 Tech Stack
 Frontend	------> React.js
