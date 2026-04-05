@@ -1,64 +1,64 @@
-import { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
-import axiosInstance from "../api/axiosConfig";
+import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import AuthNavbar from "../components/AuthNavbar";
+import AuthCard from "../components/AuthCard";
+import Footer from "../components/Footer";
 import { useAuth } from "../context/AuthContext";
+import "../styles/auth.css";
 
 const Login = () => {
-  const [formData, setFormData] = useState({ email: "", password: "" });
   const navigate = useNavigate();
-  const { login } = useAuth();
+  const { login, loading, userInfo } = useAuth();
+  const [error, setError] = useState("");
 
-  const handleChange = (e) => {
-    setFormData((prev) => ({
-      ...prev,
-      [e.target.name]: e.target.value,
-    }));
-  };
+  useEffect(() => {
+    if (userInfo) {
+      if (userInfo.role === "admin") {
+        navigate("/admin-dashboard");
+      } else {
+        navigate("/dashboard");
+      }
+    }
+  }, [userInfo, navigate]);
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
+  const handleLogin = async (formData) => {
+    setError("");
 
     try {
-      const { data } = await axiosInstance.post("/auth/login", formData);
-      login(data);
-      navigate("/dashboard");
-    } catch (error) {
-      alert(error.response?.data?.message || "Login failed");
+      await login({
+        email: formData.email,
+        password: formData.password,
+      });
+    } catch (err) {
+      setError(
+        err?.response?.data?.message || "Invalid email or password."
+      );
     }
   };
 
   return (
-    <div style={styles.container}>
-      <h2>Login</h2>
-      <form onSubmit={handleSubmit} style={styles.form}>
-        <input name="email" placeholder="Email" onChange={handleChange} style={styles.input} />
-        <input name="password" type="password" placeholder="Password" onChange={handleChange} style={styles.input} />
-        <button type="submit" style={styles.button}>Login</button>
-      </form>
-      <p>
-        No account? <Link to="/register">Register</Link>
-      </p>
+    <div className="auth-page">
+      <AuthNavbar />
+
+      <main className="auth-page__main">
+        <div className="auth-page__container">
+          <AuthCard
+            title="Login"
+            subtitle="Login to access your MR. Bunker account"
+            buttonText="Login"
+            footerText="Don’t have an account?"
+            footerLinkText="Registration"
+            footerLinkTo="/register"
+            onSubmit={handleLogin}
+            loading={loading}
+            error={error}
+          />
+        </div>
+      </main>
+
+      <Footer />
     </div>
   );
-};
-
-const styles = {
-  container: {
-    maxWidth: "400px",
-    margin: "40px auto",
-  },
-  form: {
-    display: "flex",
-    flexDirection: "column",
-    gap: "12px",
-  },
-  input: {
-    padding: "10px",
-  },
-  button: {
-    padding: "10px",
-    cursor: "pointer",
-  },
 };
 
 export default Login;
