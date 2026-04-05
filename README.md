@@ -172,9 +172,13 @@ MONGO_URI=mongodb://127.0.0.1:27017/storage-system
 
 
         AWS S3 for image storage
+        
         Booking approval system
+        
         Notifications for admin
+        
         Payment integration
+        
         Role-based dashboard separation    
 
 
