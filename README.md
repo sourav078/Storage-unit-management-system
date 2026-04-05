@@ -5,6 +5,7 @@ A full-stack web application to manage storage units, bookings, and admin operat
 🌟 Features
 
 
+
       👤 User
       
           Register & Login
@@ -19,6 +20,7 @@ A full-stack web application to manage storage units, bookings, and admin operat
           
           View personal dashboard
           
+
       
       🛠 Admin
         
