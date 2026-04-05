@@ -33,14 +33,21 @@ A full-stack web application to manage storage units, bookings, and admin operat
             Update unit details & status
             
             Delete units
+            
 
 🧱 Tech Stack
-Frontend	------> React.js
-Backend	-------->Node.js + Express
-Database -------->	MongoDB
-Auth ------------>	JWT
-File Upload ------>	Multer
-Styling	----------> CSS       
+
+      Frontend	------> React.js  
+      
+      Backend	-------->Node.js + Express
+      
+      Database -------->	MongoDB
+      
+      Auth ------------>	JWT
+      
+      File Upload ------>	Multer
+      
+      Styling	----------> CSS       
 
 📁 Project Structure
 taskmanagerv1/
